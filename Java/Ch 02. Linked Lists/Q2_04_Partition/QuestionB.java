@@ -7,6 +7,7 @@ public class QuestionB {
 	public static LinkedListNode partition(LinkedListNode node, int x) {
 		LinkedListNode beforeStart = null;
 		LinkedListNode afterStart = null;
+		LinkedListNode middle = null;
 		
 		/* Partition list */
 		while (node != null) {
@@ -15,6 +16,10 @@ public class QuestionB {
 				/* Insert node into start of before list */
 				node.next = beforeStart;
 				beforeStart = node;	
+			}else if (node.data == x) {
+				/* Insert node into start of before list */
+				node.next = middle;
+				middle = node;
 			} else {
 				/* Insert node into front of after list */
 				node.next = afterStart;
@@ -32,6 +37,12 @@ public class QuestionB {
 		while (beforeStart.next != null) {
 			beforeStart = beforeStart.next;
 		}
+
+		beforeStart.next = middle;
+		while (beforeStart.next != null) {
+			beforeStart = beforeStart.next;
+		}
+
 		beforeStart.next = afterStart;
 		return head;
 	}
